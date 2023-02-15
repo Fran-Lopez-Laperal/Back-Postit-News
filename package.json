@@ -4,7 +4,8 @@
   "description": "Este proyecto se trata de una plataforma de noticias colaborativas donde los usuarios pueden registrarse y publicar noticias en diferentes categorías temáticas. Los usuarios anónimos pueden visualizar la lista de las últimas noticias del día, noticias de días anteriores y filtrar por tema. Además, tienen la opción de iniciar sesión o registrarse proporcionando su nombre, correo electrónico, biografía y foto.",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "initDB": "node src/db/initDB.js"
   },
   "keywords": [],
   "author": "",
