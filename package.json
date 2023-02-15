@@ -1,0 +1,26 @@
+{
+  "name": "proyecto2",
+  "version": "1.0.0",
+  "description": "Este proyecto se trata de una plataforma de noticias colaborativas donde los usuarios pueden registrarse y publicar noticias en diferentes categorías temáticas. Los usuarios anónimos pueden visualizar la lista de las últimas noticias del día, noticias de días anteriores y filtrar por tema. Además, tienen la opción de iniciar sesión o registrarse proporcionando su nombre, correo electrónico, biografía y foto.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.1.2",
+    "sharp": "^0.31.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
