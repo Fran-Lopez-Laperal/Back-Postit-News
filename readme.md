@@ -34,7 +34,7 @@ Los usuarios registrados tienen las mismas opciones que los usuarios anónimos, 
     idUser
     title
     image (opcional)
-    entradilla
+    introduction
     text
     category
     upvotes
@@ -45,8 +45,8 @@ Los usuarios registrados tienen las mismas opciones que los usuarios anónimos, 
 ## Endpoints de Usuarios Anónimos
 
 -  **GET**  [`/news`] - Lista de las últimas noticias del día ordenadas por valoración.
--  **GET**  [`/news/date/:date`] - Lista de noticias de días anteriores.
--  **GET**  [`/news/category/:category`] - Lista de noticias filtradas por tema.
+-  **GET**  [`/news/old`] - Lista de noticias de días anteriores.
+-  **GET**  [`/news/filter/:category`] - Lista de noticias filtradas por tema.
 -  **POST** [`/users/register`] - Registro de usuario proporcionando nombre, correo electrónico, biografía y foto.
 -  **POST** [`/users/login`] - Inicio de sesión del usuario(login).(devuelve TOKEN)
 
@@ -61,7 +61,7 @@ Los usuarios registrados tienen las mismas opciones que los usuarios anónimos, 
 -  **POST** [`/news/:idNews/upvote`] - Vota positivamente una noticia. TOKEN
 -  **POST** [`/news/:idNews/downvote`] - Vota negativamente una noticia. TOKEN
 -  **GET** [`/news/:idNews`] - Devuelve información de una noticia concreta.(A MAYORES)
--  **DELETE** [`/users`] - Elimina al usuario.(A MAYORES)
+-  **DELETE** [`/users`] - Elimina al usuario.(A MAYORES)TOKEN
 
 <!-- USUARIOS ANÓNIMOS: 
 1. visualizar la lista de últimas noticias del día ordenadas por valoración 
