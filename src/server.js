@@ -4,6 +4,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
+const { newUser } = require('./controllers/users');
 
 
 const app = express();
@@ -23,11 +24,11 @@ app.use(fileUpload());
 
 //ENDPOINTS
 
-app.post('/users/register', newUser);
-app.post('/users/login', loginUser);
+ app.post('/users/register', newUser);
+/*app.post('/users/login', loginUser);
 app.get('/users', getUser);
-app.put('/users', editUser);
-app.put('/users/avatar', editAvatar);
+app.put('/users', isAuth, editUser);
+app.put('/users/avatar',isAuth, editAvatar);
 app.delete('/users', deleteUser);
 
 app.post('/news' , createNew);
@@ -35,13 +36,13 @@ app.get('/news', getNews);
 app.put('/news/:idNews', editNew);
 app.get('/news/filter/:idCategory', filterNews);
 app.get('/news/old', filterOldNews);
-app.post('/news/:idNews/vote',voteNew);
+app.post('/news/:idNews/vote',voteNew); */
 
 
 //MIDDLEWARE ERROR
 
 app.use ((err,req,res,next) => {
-    console.err(err);
+    console.error(err);
     res.status (err.httpStatus || 500).send ({
         status:'error',
         message:err.message,
