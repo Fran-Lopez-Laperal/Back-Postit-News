@@ -30,18 +30,8 @@ const newUser = async (req, res, next) => {
     res.send ({
       status: 'ok',
       message: 'Usuario creado',
-      data: {
-        user: {
-          id: idNewUser,
-          name,
-          email,
-          password,
-          bio,
-          photo,
-
-        }
       }
-    });
+    );
     
   } catch (err) {
     next(err)
