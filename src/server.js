@@ -4,7 +4,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
-const { newUser, loginUser } = require('./controllers/users');
+const { newUser, loginUser, getUser } = require('./controllers/users');
 
 
 const app = express();
@@ -22,12 +22,14 @@ app.use(express.json());
 
 app.use(fileUpload());
 
+const isAuth = require('./middleware/isAuth');
+
 //ENDPOINTS
 
- app.post('/users/register', newUser);
+app.post('/users/register', newUser);
 app.post('/users/login', loginUser);
-/*app.get('/users', getUser);
-app.put('/users', isAuth, editUser);
+app.get('/users', isAuth, getUser);
+/*app.put('/users', isAuth, editUser);
 app.put('/users/avatar',isAuth, editAvatar);
 app.delete('/users', deleteUser);
 
