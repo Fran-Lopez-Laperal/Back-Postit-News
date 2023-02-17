@@ -6,12 +6,12 @@ const selectUserByIdQuery = async (idUser) => {
 
 
     try {
-      connection =   await getDB();
+      connection = await getDB();
 
-      let [users] = connection.query(
+      const [users] = await connection.query(
         `SELECT  id, name, email, avatar, bio, createdAt FROM users WHERE  id =  ?`,
         [idUser]
-      )
+      );
 
       if(users.length < 1) {
         generateError(`Usuario ${users.name} no encontrado` , 404)
