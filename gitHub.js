@@ -54,7 +54,7 @@
 //! es necesario actualizar esta rama en la que estamos trabajando.
 
 //* 1. Volvemos a la rama en la que estamos trabajando.
-//? $ git bracnh newUser
+//? $ git branch newUser
 
 //* 2. Actualizamos todos los cambios de la rama master desde la rama de trabajo.
 //? $ git rebase master
