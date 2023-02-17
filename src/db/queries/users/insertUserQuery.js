@@ -31,10 +31,11 @@ const insertUserQuery = async ( name, email, password, bio ) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await connection.query (
+    const [newUser] = await connection.query (
       'INSERT INTO users (name, email, password, bio) VALUES (?, ?, ?, ?)', 
       [name, email, hashedPassword, bio]
     );
+    console.log(newUser.insertId);
     return newUser.insertId;
 
 
