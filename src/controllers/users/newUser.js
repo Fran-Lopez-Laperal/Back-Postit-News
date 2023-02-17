@@ -12,7 +12,12 @@ const newUser = async (req, res, next) => {
       generateError('Faltan campos', 400);
     };
 
-    const idNewUser = await insertUserQuery(name, email, password, bio);
+    const idNewUser = await insertUserQuery(
+        name,
+        email,
+        password,
+        bio
+    );
     console.log(idNewUser);
     if(req.files) {
 
