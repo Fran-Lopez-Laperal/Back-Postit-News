@@ -29,13 +29,8 @@ const createNew = async (req, res, next) => {
    
             const idPhoto = await insertPhotoNewQuery(photoNew, idNews);
 
-               /*  // Pusheamos la foto al array de fotos.
-                photo.push({
-                    id: idPhoto,
-                    name: photoNew,
-                }); */
             }
-        console.log(photo);
+        
 
         res.send({
             status: 'ok',
