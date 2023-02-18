@@ -1,26 +1,30 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
-const fileUpload = require('express-fileupload');
-const { newUser, loginUser, getUser } = require('./controllers/users');
-
+const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
+const {
+  newUser,
+  loginUser,
+  getUser,
+  editAvatar,
+} = require("./controllers/users");
 
 const app = express();
-
 
 //MIDDLEWARES
 
 app.use(cors());
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
 app.use(express.static(process.env.UPLOADS_DIR));
 
 app.use(express.json());
 
 app.use(fileUpload());
+
 
 const isAuth = require('./middleware/isAuth');
 const { createNew } = require('./controllers/news');
@@ -42,24 +46,25 @@ app.post('/news', isAuth, createNew);
 //app.post('/news/:idNews/vote',voteNew);
 
 
+
 //MIDDLEWARE ERROR
 
-app.use ((err,req,res,next) => {
-    console.error(err);
-    res.status (err.httpStatus || 500).send ({
-        status:'error',
-        message:err.message,
-    });
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.httpStatus || 500).send({
+    status: "error",
+    message: err.message,
+  });
 });
 
 //MIDDLEWARE RUTA NO ENCONTRADA
-app.use ((req,res) => {
-    res.status(404).send ({
-        status:'error',
-        message:'Ruta no encontrada',
-    });
+app.use((req, res) => {
+  res.status(404).send({
+    status: "error",
+    message: "Ruta no encontrada",
+  });
 });
 
-app.listen (process.env.PORT, () => {
-    console.log(`Server listening at http://localhost:${process.env.PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server listening at http://localhost:${process.env.PORT}`);
 });
