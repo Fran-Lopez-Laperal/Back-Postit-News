@@ -25,23 +25,27 @@ app.use(express.json());
 
 app.use(fileUpload());
 
-const isAuth = require("./middleware/isAuth");
+
+const isAuth = require('./middleware/isAuth');
+const { createNew } = require('./controllers/news');
 
 //ENDPOINTS
 
-app.post("/users/register", newUser);
-app.post("/users/login", loginUser);
-app.get("/users", isAuth, getUser);
-//app.put("/users", isAuth, editUser);
-app.put("/users/avatar", isAuth, editAvatar);
-/*app.delete('/users', deleteUser);
+app.post('/users/register', newUser);
+app.post('/users/login', loginUser);
+app.get('/users', isAuth, getUser);
+//app.put('/users', isAuth, editUser);
+//app.put('/users/avatar',isAuth, editAvatar);
+//app.delete('/users', deleteUser);
 
-app.post('/news' , createNew);
-app.get('/news', getNews);
-app.put('/news/:idNews', editNew);
-app.get('/news/filter/:idCategory', filterNews);
-app.get('/news/old', filterOldNews);
-app.post('/news/:idNews/vote',voteNew); */
+app.post('/news', isAuth, createNew);
+//app.get('/news', getNews);
+//app.put('/news/:idNews', editNew);
+//app.get('/news/filter/:idCategory', filterNews);
+//app.get('/news/old', filterOldNews);
+//app.post('/news/:idNews/vote',voteNew);
+
+
 
 //MIDDLEWARE ERROR
 
