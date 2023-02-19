@@ -1,15 +1,17 @@
+const insertPhotoNewQuery = require("../../db/queries/news/insertPhotoNewQuery");
 const selectNewByIdQuery = require("../../db/queries/news/selectNewByIdQuery");
 const updateNewQuery = require("../../db/queries/news/updateNewQuery");
-const { generateError } = require("../../helpers");
+const { generateError, deleteImg, saveImg } = require("../../helpers");
 
 const editNew = async (req, res, next) => {
   try {
     const { idNew } = req.params;
 
-    await selectNewByIdQuery(idNew);
+    const [infoNew] = await selectNewByIdQuery(idNew);
 
-    const { title, introduction, text, photo } = req.body;
+    const { title, introduction, text } = req.body;
 
+    console.log(infoNew);
     if (!title || !introduction || !text) {
       generateError("Faltan campos", 404);
     }
@@ -17,7 +19,13 @@ const editNew = async (req, res, next) => {
     await updateNewQuery(title, introduction, text, idNew);
 
     if (req.files) {
-      await insertPhotoNewQuery(photo, idNew);
+      if (infoNew.image) {
+        await deleteImg(infoNew.image);
+      }
+
+      const nameImage = await saveImg(req.files.image, 500);
+
+      await insertPhotoNewQuery(nameImage, idNew);
     }
 
     res.send({

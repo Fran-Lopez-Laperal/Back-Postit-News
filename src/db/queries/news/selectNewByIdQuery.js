@@ -14,8 +14,7 @@ const selectNewByIdQuery = async (idNew) => {
       generateError("Noticia no encontrada", 404);
     }
 
-    console.log(infoNew);
-    return infoNew.insertId;
+    return infoNew;
   } finally {
     if (connection) connection.release();
   }
