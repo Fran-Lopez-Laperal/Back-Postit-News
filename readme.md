@@ -56,7 +56,7 @@ modifiedAt
 - **PUT** [`/users/avatar`] - Edita la foto del usuario. TOKEN
 - **POST** [`/news`] - Publica una nueva noticia proporcionando título, imagen opcional, entradilla, texto y tema.TOKEN
 - **PUT** [`/news/:idNews`] - Edita una noticia publicada por el usuario.TOKEN
-- **DELETE** [`/news/:idNews`] - Borra una noticia publicada por el usuario.TOKEN
+- **DELETE** [`/news/:idNew`] - Borra una noticia publicada por el usuario.TOKEN
 - **POST** [`/news/:idNews/vote`] - Vota positiva o negativamente una noticia. TOKEN
 - **GET** [`/news/:idNews`] - Devuelve información de una noticia concreta.(A MAYORES)
 - **DELETE** [`/users`] - Elimina al usuario.(A MAYORES)TOKEN
