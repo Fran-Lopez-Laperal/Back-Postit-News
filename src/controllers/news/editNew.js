@@ -1,3 +1,4 @@
+const deleteImageQuery = require("../../db/queries/news/deleteImageQuery");
 const insertPhotoNewQuery = require("../../db/queries/news/insertPhotoNewQuery");
 const selectNewByIdQuery = require("../../db/queries/news/selectNewByIdQuery");
 const updateNewQuery = require("../../db/queries/news/updateNewQuery");
@@ -18,7 +19,11 @@ const editNew = async (req, res, next) => {
 
     await updateNewQuery(title, introduction, text, idNew);
 
+    //Si existe imagen pero el usuario quiere que la noticia no tenga:
+    await deleteImageQuery(idNew);
+
     if (req.files) {
+      //Si existe una imagen previa, se borra
       if (infoNew.image) {
         await deleteImg(infoNew.image);
       }
@@ -26,6 +31,7 @@ const editNew = async (req, res, next) => {
       const nameImage = await saveImg(req.files.image, 500);
 
       await insertPhotoNewQuery(nameImage, idNew);
+    } else {
     }
 
     res.send({
