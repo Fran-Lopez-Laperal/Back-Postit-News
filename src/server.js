@@ -28,7 +28,7 @@ const {
   getUser,
   editAvatar,
 } = require("./controllers/users");
-const { createNew, editNew } = require("./controllers/news");
+const { createNew, editNew, createCategory } = require("./controllers/news");
 
 //ENDPOINTS
 
@@ -42,6 +42,7 @@ app.put("/users/avatar", isAuth, editAvatar);
 app.post("/news", isAuth, createNew);
 //app.get('/news', getNews);
 app.put("/news/:idNew", isAuth, editNew);
+app.post("/news/categories", isAuth, createCategory);
 //app.get('/news/filter/:idCategory', filterNews);
 //app.get('/news/old', filterOldNews);
 //app.post('/news/:idNews/vote',voteNew);

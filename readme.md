@@ -61,6 +61,8 @@ modifiedAt
 - **GET** [`/news/:idNews`] - Devuelve información de una noticia concreta.(A MAYORES)
 - **DELETE** [`/users`] - Elimina al usuario.(A MAYORES)TOKEN
 
+- **PUT** [`/news/categories`] - Crear categorias(A MAYORES)
+
 <!-- USUARIOS ANÓNIMOS:
 1. visualizar la lista de últimas noticias del día ordenadas por valoración
 2. visualizar noticias de diías anteriores
