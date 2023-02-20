@@ -46,6 +46,7 @@ app.put("/news/:idNew", isAuth, editNew);
 //app.get('/news/filter/:idCategory', filterNews);
 //app.get('/news/old', filterOldNews);
 //app.post('/news/:idNews/vote',voteNew);
+//app.delete('/news/:idNew', isAuth, deleteNew);
 
 //MIDDLEWARE ERROR
 
