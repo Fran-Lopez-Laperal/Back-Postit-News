@@ -27,15 +27,22 @@ const {
   loginUser,
   getUser,
   editAvatar,
+  editUser,
 } = require("./controllers/users");
-const { createNew, editNew, createCategory } = require("./controllers/news");
+
+const {
+  createNew,
+  editNew,
+  filterOldNews
+} = require("./controllers/news");
+
 
 //ENDPOINTS
 
 app.post("/users/register", newUser);
 app.post("/users/login", loginUser);
 app.get("/users", isAuth, getUser);
-//app.put('/users', isAuth, editUser);
+app.put("/users", isAuth, editUser);
 app.put("/users/avatar", isAuth, editAvatar);
 //app.delete('/users', deleteUser);
 
@@ -44,7 +51,7 @@ app.post("/news", isAuth, createNew);
 app.put("/news/:idNew", isAuth, editNew);
 app.post("/news/categories", isAuth, createCategory);
 //app.get('/news/filter/:idCategory', filterNews);
-//app.get('/news/old', filterOldNews);
+app.get('/news/old', filterOldNews);
 //app.post('/news/:idNews/vote',voteNew);
 
 //MIDDLEWARE ERROR
