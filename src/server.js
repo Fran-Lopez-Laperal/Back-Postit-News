@@ -30,6 +30,7 @@ const {
   editUser,
 } = require("./controllers/users");
 const { createNew, editNew } = require("./controllers/news");
+const filterOldNews = require("./controllers/news/filterOldNews");
 
 //ENDPOINTS
 
@@ -44,7 +45,7 @@ app.post("/news", isAuth, createNew);
 //app.get('/news', getNews);
 app.put("/news/:idNew", isAuth, editNew);
 //app.get('/news/filter/:idCategory', filterNews);
-//app.get('/news/old', filterOldNews);
+app.get('/news/old', filterOldNews);
 //app.post('/news/:idNews/vote',voteNew);
 
 //MIDDLEWARE ERROR
