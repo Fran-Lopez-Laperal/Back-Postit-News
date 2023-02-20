@@ -29,8 +29,12 @@ const {
   editAvatar,
   editUser,
 } = require("./controllers/users");
-const { createNew, editNew } = require("./controllers/news");
-const filterOldNews = require("./controllers/news/filterOldNews");
+
+const {
+  createNew,
+  editNew,
+  filterOldNews
+} = require("./controllers/news");
 
 //ENDPOINTS
 

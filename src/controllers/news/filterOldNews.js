@@ -1,4 +1,4 @@
-const selectOldNewsQuery = require("../../db/queries/news/selectOldNesQuery")
+const selectOldNewsQuery = require("../../db/queries/news/selectOldNewsQuery")
 
 const filterOldNews = async ( req, res, next) => {
 
