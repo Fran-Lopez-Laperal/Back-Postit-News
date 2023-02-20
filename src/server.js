@@ -27,6 +27,7 @@ const {
   loginUser,
   getUser,
   editAvatar,
+  editUser,
 } = require("./controllers/users");
 const { createNew, editNew } = require("./controllers/news");
 
@@ -35,7 +36,7 @@ const { createNew, editNew } = require("./controllers/news");
 app.post("/users/register", newUser);
 app.post("/users/login", loginUser);
 app.get("/users", isAuth, getUser);
-//app.put('/users', isAuth, editUser);
+app.put("/users", isAuth, editUser);
 app.put("/users/avatar", isAuth, editAvatar);
 //app.delete('/users', deleteUser);
 
