@@ -37,7 +37,9 @@ const {
   createCategory,
   filterNews,
   voteNew,
+  deleteNew,
 } = require("./controllers/news");
+
 
 //ENDPOINTS
 
@@ -56,6 +58,7 @@ app.post("/news/categories", isAuth, createCategory);
 app.post("/news/filter", filterNews);
 app.get("/news/old", filterOldNews);
 app.post('/news/:idNews/vote/:value',isAuth, voteNew);
+app.delete("/news/idNew", isAuth, deleteNew);
 
 
 //MIDDLEWARE ERROR
