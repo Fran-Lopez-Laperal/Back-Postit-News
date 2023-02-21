@@ -26,6 +26,7 @@ const createTables = async () => {
                 password VARCHAR(100) NOT NULL,
                 avatar VARCHAR(100),
                 bio TEXT NOT NULL,
+                role ENUM('admin', 'normal') DEFAULT 'normal',
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
             )
