@@ -1,5 +1,5 @@
-/* const selectNewByIdQuery = require('../../db/queries/news/selectNewByIdQuery');
-const deleteNewquery = require('../../db/queries/news/deleteNewQuery');
+const selectNewByIdQuery = require('../../db/queries/news/selectNewByIdQuery');
+const deleteNewQuery = require('../../db/queries/news/deleteNewQuery');
 
 const { generateError, deleteImg } = require('../../helpers');
 
@@ -17,7 +17,7 @@ const deleteNew = async (req, res, next) => {
             await deleteImg(ownNew.image);
         }
 
-        await deleteNewquery(idNew);
+        await deleteNewQuery(idNew);
 
         res.send({
             status: 'ok',
@@ -29,4 +29,4 @@ const deleteNew = async (req, res, next) => {
     }
 };
 
-module.exports = deleteNew; */
+module.exports = deleteNew;

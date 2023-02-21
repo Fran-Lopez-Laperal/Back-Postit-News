@@ -1,4 +1,4 @@
-/* const getDB = require('../../getDB');
+const getDB = require('../../getDB');
 
 const deleteNewQuery = async (idNew) => {
 
@@ -18,4 +18,4 @@ const deleteNewQuery = async (idNew) => {
     }
 };
 
-module.exports = deleteNewQuery; */
+module.exports = deleteNewQuery;
