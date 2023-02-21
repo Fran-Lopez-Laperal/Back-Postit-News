@@ -8,8 +8,9 @@ const deleteNew = async (req, res, next) => {
         const { idNew } = req.params;
 
         const ownNew = await selectNewByIdQuery(idNew);
-
-        if (ownNew.idUser !== req.user.id) {
+        console.log(req.user.id);
+        console.log(ownNew[0].id);
+        if (ownNew[0].idUser !== req.user.id) {
             generateError('No tienes suficientes permisos', 401);
         }
 
