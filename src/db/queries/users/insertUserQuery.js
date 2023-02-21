@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const { generateError } = require('../../../helpers');
 
 
-const insertUserQuery = async ( name, email, password, bio ) => {
+const insertUserQuery = async ( name, email, password, bio, role ) => {
 
   let connection;
 
@@ -32,8 +32,8 @@ const insertUserQuery = async ( name, email, password, bio ) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const [newUser] = await connection.query (
-      'INSERT INTO users (name, email, password, bio) VALUES (?, ?, ?, ?)', 
-      [name, email, hashedPassword, bio]
+      'INSERT INTO users (name, email, password, bio, role) VALUES (?, ?, ?, ?, ?)', 
+      [name, email, hashedPassword, bio, role]
     );
     console.log(newUser.insertId);
     return newUser.insertId;
