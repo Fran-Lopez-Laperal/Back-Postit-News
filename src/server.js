@@ -36,7 +36,7 @@ const {
   filterOldNews,
   createCategory,
   filterNews,
-  voteNew
+  voteNew,
 } = require("./controllers/news");
 
 //ENDPOINTS

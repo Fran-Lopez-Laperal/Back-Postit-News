@@ -31,3 +31,5 @@ const voteNew = async(req, res, next)=>{
         next(e)
     }
 }
+
+module.exports = voteNew;
