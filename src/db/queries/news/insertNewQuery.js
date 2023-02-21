@@ -5,12 +5,12 @@ const insertNewQuery = async (title, introduction, text, idUser) => {
 
     try {
         connection = await getDB();
-
+        console.log(idUser); 
         const [createNew] = await connection.query(
             `INSERT INTO news (title, introduction, text, idUser) VALUES (?, ?, ?, ?)`,
             [title, introduction, text, idUser]
         );
-
+    
         return createNew.insertId;
         
     } finally {

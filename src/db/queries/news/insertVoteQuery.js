@@ -1,7 +1,7 @@
+const getDB = require("../../getDB");
 
 
-
-const inserVoteQuery = async(idUser, idNews, value)=>{
+const insertVoteQuery = async(idUser, idNews, value)=>{
     let connection
     try{
         connection = await getDB()
@@ -15,3 +15,5 @@ const inserVoteQuery = async(idUser, idNews, value)=>{
         connection?.release()
     }
 }
+
+module.exports = insertVoteQuery;
