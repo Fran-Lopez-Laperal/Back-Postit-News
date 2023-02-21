@@ -6,8 +6,8 @@ const { generateError, saveImg } = require('../../helpers');
 
 const newUser = async (req, res, next) => {
   try {
-    const {name, email, password, bio, photo} = req.body;
-
+    const {name, email, password, bio,role, photo} = req.body;
+    console.log('Viene todo el body por las request?' ,req.body)
     if (!name || !email || !password || !bio) {
       generateError('Faltan campos', 400);
     };
@@ -16,7 +16,8 @@ const newUser = async (req, res, next) => {
         name,
         email,
         password,
-        bio
+        bio,
+        role
     );
     console.log(idNewUser);
     if(req.files) {
