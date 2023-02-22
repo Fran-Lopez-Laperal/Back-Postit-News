@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(fileUpload());
 
 const isAuth = require("./middleware/isAuth");
+const isAuthOptional = require("./middleware/isAuthOptional");
 
 //CONTROLLERS
 const {
@@ -38,6 +39,7 @@ const {
   filterNews,
   voteNew,
   deleteNew,
+  getNew,
 } = require("./controllers/news");
 
 
@@ -51,7 +53,6 @@ app.put("/users/avatar", isAuth, editAvatar);
 //app.delete('/users', deleteUser);
 
 app.post("/news", isAuth, createNew);
-//app.get('/news', getNews);
 app.put("/news/:idNew", isAuth, editNew);
 
 app.post("/news/categories", isAuth, createCategory);
@@ -60,6 +61,7 @@ app.get("/news/old", filterOldNews);
 app.post('/news/:idNews/vote/:value',isAuth, voteNew);
 
 app.delete("/news/:idNew", isAuth, deleteNew);
+app.get('/news/:idNew', isAuthOptional, getNew);
 
 
 //MIDDLEWARE ERROR
