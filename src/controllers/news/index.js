@@ -7,6 +7,7 @@ const createCategory = require("./createCategory");
 const filterNews = require("./filterNews");
 const voteNew = require("./voteNew");
 const deleteNew = require("./deleteNew");
+const getNew = require("./getNew");
 
 module.exports = {
   createNew,
@@ -16,4 +17,5 @@ module.exports = {
   filterNews,
   voteNew,
   deleteNew,
+  getNew,
 };
