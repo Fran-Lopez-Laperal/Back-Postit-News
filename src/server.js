@@ -29,6 +29,7 @@ const {
   getUser,
   editAvatar,
   editUser,
+  deleteUser,
 } = require("./controllers/users");
 
 const {
@@ -42,7 +43,6 @@ const {
   getNew,
 } = require("./controllers/news");
 
-
 //ENDPOINTS
 
 app.post("/users/register", newUser);
@@ -50,19 +50,18 @@ app.post("/users/login", loginUser);
 app.get("/users", isAuth, getUser);
 app.put("/users", isAuth, editUser);
 app.put("/users/avatar", isAuth, editAvatar);
-//app.delete('/users', deleteUser);
+app.delete("/users", isAuth, deleteUser);
 
 app.post("/news", isAuth, createNew);
 app.put("/news/:idNew", isAuth, editNew);
 
-app.post("/news/categories", isAuth, createCategory);
+app.post("/news/categories", isAuth, createCategory); //no falta el isAdmin???
 app.post("/news/filter", filterNews);
 app.get("/news/old", filterOldNews);
-app.post('/news/:idNews/vote/:value',isAuth, voteNew);
+app.post("/news/:idNews/vote/:value", isAuth, voteNew);
 
 app.delete("/news/:idNew", isAuth, deleteNew);
-app.get('/news/:idNew', isAuthOptional, getNew);
-
+app.get("/news/:idNew", isAuthOptional, getNew);
 
 //MIDDLEWARE ERROR
 
