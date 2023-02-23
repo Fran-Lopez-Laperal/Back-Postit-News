@@ -6,17 +6,15 @@ const deleteUserQuery = async (idUser) => {
   try {
     connection = await getDB();
 
-    const [idNews] = await connection.query(
-      "SELECT id FROM news WHERE idUser = ?",
+    const [idAndImageNews] = await connection.query(
+      "SELECT id, image FROM news WHERE idUser = ?",
       [idUser]
     );
 
     await connection.query("set SQL_SAFE_UPDATES=0");
 
-    for (const idNew of Object.values(idNews)) {
-      let id = Object.values(idNew);
-
-      id = id[0];
+    for (const idNew of idAndImageNews) {
+      let { id } = idNew;
       await connection.query("DELETE FROM newscategories WHERE idNews = ?", [
         id,
       ]);
@@ -29,6 +27,8 @@ const deleteUserQuery = async (idUser) => {
     await connection.query(" DELETE FROM news WHERE idUser = ?", [idUser]);
 
     await connection.query("DELETE FROM users WHERE id = ?", [idUser]);
+
+    return idAndImageNews;
   } finally {
     if (connection) connection.release();
   }
