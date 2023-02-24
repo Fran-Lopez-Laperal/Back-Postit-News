@@ -11,6 +11,7 @@ const voteNew = async(req, res, next)=>{
     try{
 
         let {idNews, value} = req.params;
+
         let idUser = req.user.id;
 
         let foundNew = await selectNewByIdQuery(idNews)
@@ -21,12 +22,12 @@ const voteNew = async(req, res, next)=>{
 
         if(!foundUser) generateError("Usuario no encontrado", 404)
 
-        let voteValue = await selectVoteQuery()
-
-        if(voteValue) {
+        let voteValue = await selectVoteQuery(idUser, idNews)
+        
+        if(voteValue.length >0) {
             await deleteVoteQuery(idUser, idNews)
 
-            res.send({
+            return res.send({
                 status:"ok",
                 data: {
                     idNews : idNews,

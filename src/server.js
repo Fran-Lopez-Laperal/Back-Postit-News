@@ -40,10 +40,12 @@ const {
   voteNew,
   deleteNew,
   getNew,
+  getNews
 } = require("./controllers/news");
 
 
 const { isAuth, isAuthOptional, isAdmin } = require("./middleware");
+
 
 
 
@@ -63,13 +65,12 @@ app.post("/news/categories", isAuth, isAdmin, createCategory);
 app.post("/news/filter", filterNews);
 app.get("/news/old", filterOldNews);
 
-app.post("/news/:idNews/vote/:value", isAuth, voteNew);
-
-app.post('/news/:idNews/vote/:value', isAuth, voteNew);
-
+app.get('/news/:idNews/vote/:value', isAuth, voteNew);
 
 app.delete("/news/:idNew", isAuth, deleteNew);
-app.get("/news/:idNew", isAuthOptional, getNew);
+app.get('/news/:idNew', isAuthOptional, getNew);
+app.get('/news', getNews)
+
 
 //MIDDLEWARE ERROR
 

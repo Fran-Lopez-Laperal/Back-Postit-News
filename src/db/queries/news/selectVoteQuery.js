@@ -7,11 +7,12 @@ const selectVoteQuery = async (idUser, idNew)=>{
     
     try{
         connection = await getDB()
-
+        console.log(idUser, idNew)
         let vote = await connection.query(`
-            SELECT * FROM votes WHERE idUser= ? AND idNew= ?
+            SELECT * FROM votes WHERE idUser=? AND idNew=?
         `, [idUser, idNew])
 
+        console.log(vote)
         if (vote.length > 0) return vote[0]
         
         return false
