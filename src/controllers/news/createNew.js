@@ -8,7 +8,7 @@ const createNew = async (req, res, next) => {
   try {
     const { title, introduction, text, category } = req.body;
     console.log(req.body);
-    if (!title || !introduction || !text) {
+    if (!title || !introduction || !text || !category) {
       generateError("Faltan campos", 400);
     }
 
@@ -37,6 +37,7 @@ const createNew = async (req, res, next) => {
           introduction,
           text,
           photo,
+          category,
           idUser: req.user.id,
           createdAt: new Date(),
         },

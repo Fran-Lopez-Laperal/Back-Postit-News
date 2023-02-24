@@ -10,14 +10,14 @@ const editNew = async (req, res, next) => {
 
     const [infoNew] = await selectNewByIdQuery(idNew);
 
-    const { title, introduction, text } = req.body;
+    const { title, introduction, text, category } = req.body;
 
     console.log(infoNew);
     if (!title || !introduction || !text) {
       generateError("Faltan campos", 404);
     }
 
-    await updateNewQuery(title, introduction, text, idNew);
+    await updateNewQuery(title, introduction, text, category, idNew);
 
     //Si existe imagen pero el usuario quiere que la noticia no tenga:
     await deleteImageQuery(idNew);

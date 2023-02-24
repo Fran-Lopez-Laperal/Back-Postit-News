@@ -43,7 +43,7 @@ const {
 } = require("./controllers/news");
 
 
-const { isAuth, isAuthOptional } = require("./middleware");
+const { isAuth, isAuthOptional, isAdmin } = require("./middleware");
 
 
 
@@ -59,7 +59,7 @@ app.delete("/users", isAuth, deleteUser);
 app.post("/news", isAuth, createNew);
 app.put("/news/:idNew", isAuth, editNew);
 
-app.post("/news/categories", isAuth, createCategory); //no falta el isAdmin???
+app.post("/news/categories", isAuth, isAdmin, createCategory);
 app.post("/news/filter", filterNews);
 app.get("/news/old", filterOldNews);
 

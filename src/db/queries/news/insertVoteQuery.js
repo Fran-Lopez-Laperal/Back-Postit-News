@@ -3,6 +3,7 @@ const getDB = require("../../getDB");
 
 const insertVoteQuery = async(idUser, idNews, value)=>{
     let connection
+    
     try{
         connection = await getDB()
 
