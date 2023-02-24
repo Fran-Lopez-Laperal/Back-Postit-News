@@ -5,6 +5,8 @@ const createCategory = async (req, res, next) => {
   try {
     const { category } = req.body;
 
+    console.log(category);
+
     if (!category) {
       generateError("Faltan campos", 404);
     }
