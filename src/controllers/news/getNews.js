@@ -9,12 +9,10 @@ const getNews = async(req, res, next)=>{
         if(!news){
             generateError('No existe ninguna noticia', 404)
         }
-
         res.send({
             status: "ok",
             data: news
         })
-
     }catch(e){
         next(e)
     }
