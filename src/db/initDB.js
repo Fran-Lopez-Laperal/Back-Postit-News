@@ -40,6 +40,7 @@ const createTables = async () => {
                 introduction VARCHAR(255) NOT NULL,
                 text TEXT NOT NULL,
                 idUser INT UNSIGNED NOT NULL,
+                idCategory INT UNSIGNED NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY (idUser) REFERENCES users(id)
@@ -50,16 +51,6 @@ const createTables = async () => {
             CREATE TABLE IF NOT EXISTS categories (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 name VARCHAR(100) NOT NULL,
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
-            )
-        `);
-
-    await connection.query(`
-            CREATE TABLE IF NOT EXISTS newscategories (
-                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                idNews INT UNSIGNED NOT NULL,
-                idCategory INT UNSIGNED NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
             )
@@ -83,7 +74,6 @@ const createTables = async () => {
   } finally {
     if (connection) connection.release();
 
-    // De forma opcional cerramos el proceso. De lo contrario hay que cerrarlo manualmente.
     process.exit();
   }
 };
