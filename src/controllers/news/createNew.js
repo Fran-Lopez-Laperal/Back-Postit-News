@@ -1,4 +1,3 @@
-const insertCategoryInNewQuery = require("../../db/queries/news/insertCategoryInNewQuery");
 const insertNewQuery = require("../../db/queries/news/insertNewQuery");
 const insertPhotoNewQuery = require("../../db/queries/news/insertPhotoNewQuery");
 
@@ -12,11 +11,15 @@ const createNew = async (req, res, next) => {
       generateError("Faltan campos", 400);
     }
 
-    const idNews = await insertNewQuery(title, introduction, text, req.user.id);
+    const idNews = await insertNewQuery(
+      title,
+      introduction,
+      text,
+      category,
+      req.user.id
+    );
 
-    //insertar categoria en la noticia
-
-    await insertCategoryInNewQuery(idNews, category);
+    //await insertCategoryInNewQuery(idNews, category);
 
     let photo;
 

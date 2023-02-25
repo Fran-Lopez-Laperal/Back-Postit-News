@@ -13,7 +13,7 @@ const editNew = async (req, res, next) => {
     const { title, introduction, text, category } = req.body;
 
     console.log(infoNew);
-    if (!title || !introduction || !text) {
+    if (!title || !introduction || !text || !category) {
       generateError("Faltan campos", 404);
     }
 

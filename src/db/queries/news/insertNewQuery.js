@@ -1,21 +1,26 @@
-const getDB = require('../../getDB');
+const getDB = require("../../getDB");
 
-const insertNewQuery = async (title, introduction, text, idUser) => {
-    let connection;
+const insertNewQuery = async (
+  title,
+  introduction,
+  text,
+  idCategory,
+  idUser
+) => {
+  let connection;
 
-    try {
-        connection = await getDB();
-        console.log(idUser); 
-        const [createNew] = await connection.query(
-            `INSERT INTO news (title, introduction, text, idUser) VALUES (?, ?, ?, ?)`,
-            [title, introduction, text, idUser]
-        );
-    
-        return createNew.insertId;
-        
-    } finally {
-        if (connection) connection.release();
-    }
+  try {
+    connection = await getDB();
+    console.log(idUser);
+    const [createNew] = await connection.query(
+      `INSERT INTO news (title, introduction, text, idUser, idCategory) VALUES (?, ?, ?, ?, ?)`,
+      [title, introduction, text, idUser, idCategory]
+    );
+
+    return createNew.insertId;
+  } finally {
+    if (connection) connection.release();
+  }
 };
 
 module.exports = insertNewQuery;

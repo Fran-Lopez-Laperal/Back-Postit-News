@@ -17,5 +17,5 @@ module.exports = {
   voteNew,
   deleteNew,
   getNew,
-  getNews
+  getNews,
 };
