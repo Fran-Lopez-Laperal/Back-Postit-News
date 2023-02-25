@@ -4,6 +4,7 @@ const { generateError } = require("../../helpers")
 const insertVoteQuery = require("../../db/queries/news/insertVoteQuery");
 const selectVoteQuery = require("../../db/queries/news/selectVoteQuery");
 const deleteVoteQuery = require("../../db/queries/news/deleteVoteQuery");
+const updateVoteQuery = require("../../db/queries/news/updateVoteQuery");
 
 
 const voteNew = async(req, res, next)=>{
@@ -25,17 +26,27 @@ const voteNew = async(req, res, next)=>{
         let voteValue = await selectVoteQuery(idUser, idNews)
         
         if(voteValue.length >0) {
-            await deleteVoteQuery(idUser, idNews)
+            if(voteValue[0].value === value){
+                await deleteVoteQuery(idUser, idNews)
 
-            return res.send({
+                return res.send({
                 status:"ok",
                 data: {
                     idNews : idNews,
                     action: "Voto quitado de la noticia"
-                }
-            })
-        
+                }})
+            }else{
+                await updateVoteQuery(idUser, idNews, value)
+                return res.send({
+                    status:"ok",
+                    data: {
+                        idNews : idNews,
+                        action: "Voto actualizado de la noticia"
+                    }})
+            }
         }
+        
+            
 
         const vote = await insertVoteQuery(idUser, idNews, value)
 
