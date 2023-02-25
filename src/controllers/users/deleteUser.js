@@ -3,12 +3,13 @@ const selectUserByIdQuery = require("../../db/queries/users/selectUserByIdQuery"
 const { deleteImg } = require("../../helpers");
 
 const deleteUser = async (req, res, next) => {
+  console.log(req.user.id);
   const { avatar } = await selectUserByIdQuery(req.user.id);
 
   await deleteImg(avatar);
-  const idAndImageNews = await deleteUserQuery(req.user.id);
+  const ImageNews = await deleteUserQuery(req.user.id);
 
-  for (let item of idAndImageNews) {
+  for (let item of ImageNews) {
     let { image } = item;
     await deleteImg(image);
   }

@@ -1,8 +1,10 @@
 # WEB DE NOTICIAS COLABORATIVAS
 
-Este proyecto se trata de una plataforma de noticias colaborativas donde los usuarios pueden registrarse y publicar noticias en diferentes categorías temáticas. Los usuarios anónimos pueden visualizar la lista de las últimas noticias del día, noticias de días anteriores y filtrar por tema. Además, tienen la opción de iniciar sesión o registrarse proporcionando su nombre, correo electrónico, biografía y foto.
+Este proyecto se trata de una plataforma de noticias colaborativas donde los usuarios pueden registrarse y publicar noticias en diferentes categorías temáticas. Los usuarios anónimos pueden visualizar la lista de las últimas noticias del día, noticias de días anteriores y filtrar por categorías. Además, tienen la opción de iniciar sesión o registrarse proporcionando su nombre, correo electrónico, biografía y foto.
 
-Los usuarios registrados tienen las mismas opciones que los usuarios anónimos, pero además pueden gestionar su perfil, publicar una nueva noticia con título, foto opcional, entradilla, texto de la noticia y tema, editar una noticia publicada previamente por ellos, borrar una noticia publicada por ellos y votar positiva o negativamente otras noticias.
+Los usuarios registrados tienen las mismas opciones que los usuarios anónimos, pero además pueden gestionar su perfil, publicar una nueva noticia con título, foto (opcional), entradilla, texto de la noticia y categoría asociada, editar una noticia publicada previamente por ellos y borrarla, además de votar positiva o negativamente otras noticias.
+
+Existe el rol admin, el cual puede añadir categorías, para posteriormente, poder ser usadas en las noticias.
 
 ## Instalar
 
@@ -28,7 +30,7 @@ Los usuarios registrados tienen las mismas opciones que los usuarios anónimos, 
 
 - **GET** [`/news`] - Lista de las últimas noticias del día ordenadas por valoración.
 - **GET** [`/news/old`] - Lista de noticias de días anteriores.🔥
-- **POST** [`/news/filter`] - Lista de noticias filtradas por tema.🔥
+- **POST** [`/news/filter`] - Lista de noticias filtradas por categorías.🔥
 - **POST** [`/users/register`] - Registro de usuario proporcionando nombre, correo electrónico, biografía y foto.🔥
 - **POST** [`/users/login`] - Inicio de sesión del usuario(login).(devuelve TOKEN)🔥
 
@@ -37,11 +39,10 @@ Los usuarios registrados tienen las mismas opciones que los usuarios anónimos, 
 - **GET** [`/users`] - Devuelve información del usuario del token.TOKEN🔥
 - **PUT** [`/users`] - Edita el nombre, email del usuario o biografía. TOKEN🔥
 - **PUT** [`/users/avatar`] - Edita la foto del usuario. TOKEN🔥
-- **POST** [`/news`] - Publica una nueva noticia proporcionando título, imagen opcional, entradilla, texto y tema.TOKEN🔥
+- **POST** [`/news`] - Publica una nueva noticia proporcionando título, imagen opcional, entradilla, texto y categoría.TOKEN🔥
 - **PUT** [`/news/:idNew`] - Edita una noticia publicada por el usuario.TOKEN🔥
 - **DELETE** [`/news/:idNew`] - Borra una noticia publicada por el usuario.TOKEN🔥
 - **POST** [`/news/:idNews/vote/:value`] - Vota positiva o negativamente una noticia. TOKEN
-- **GET** [`/news/:idNew`] - Devuelve información de una noticia concreta.(A MAYORES)🔥
-- **DELETE** [`/users`] - Elimina al usuario.(A MAYORES)TOKEN🔥
-- **POST** [`/news/categories`] - Crear categorias(A MAYORES)🔥
-
+- **GET** [`/news/:idNew`] - Devuelve información de una noticia concreta.🔥
+- **DELETE** [`/users`] - Elimina al usuario.TOKEN🔥
+- **POST** [`/news/categories`] - Crear categorias (rol admin).🔥
