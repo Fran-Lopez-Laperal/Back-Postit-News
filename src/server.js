@@ -40,7 +40,8 @@ const {
   voteNew,
   deleteNew,
   getNew,
-  getNews
+  getNews,
+  getCategories
 } = require("./controllers/news");
 
 
@@ -62,6 +63,7 @@ app.post("/news", isAuth, createNew);
 app.put("/news/:idNew", isAuth, editNew);
 
 app.post("/news/categories", isAuth, isAdmin, createCategory);
+app.get("/news/categories", getCategories)
 app.post("/news/filter", filterNews);
 app.get("/news/old", filterOldNews);
 
