@@ -7,6 +7,7 @@ const voteNew = require("./voteNew");
 const deleteNew = require("./deleteNew");
 const getNew = require("./getNew");
 const getNews = require("./getNews");
+const getCategories = require("./getCategories")
 
 module.exports = {
   createNew,
@@ -18,4 +19,5 @@ module.exports = {
   deleteNew,
   getNew,
   getNews,
+  getCategories
 };
