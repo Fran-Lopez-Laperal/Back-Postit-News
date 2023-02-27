@@ -8,12 +8,12 @@ const selectNewsQuery = async()=>{
         connection = await getDB()
 
         let [news] = await connection.query(`
-        SELECT N.*,V.id, V.idUser, V.idNew, V.value, count(N.id) as numValues FROM news N 
+        SELECT N.*, count(V.idNew) as numVotes , V.id, V.idUser, V.idNew, V.value FROM news N 
         LEFT JOIN votes V ON N.id = V.idNew 
-        GROUP BY V.idNew 
-        ORDER BY numValues DESC;
+        GROUP BY idNew
+        ORDER BY numVotes DESC
         `)
-
+        
         return news
 
     }finally{   
