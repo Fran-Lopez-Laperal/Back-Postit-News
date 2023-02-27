@@ -3,6 +3,7 @@ const getDB = require("../../getDB");
 
 const editUserQuery = async (name, email, bio, idUser) => {
   let connection;
+  console.log(idUser);
   try {
     connection = await getDB();
     if (name) {
@@ -14,11 +15,14 @@ const editUserQuery = async (name, email, bio, idUser) => {
         generateError("El nombre de usuario no está disponible", 403);
       }
 
-      await connection.query(`UPDATE users SET name  = ? WHERE id = ?`, [
+      
+      const prueba = await connection.query(`UPDATE users SET name  = ? WHERE id = ?`, [
         name,
         idUser,
       ]);
+      console.log(prueba);
     }
+  
 
     if (email) {
       const [users] = await connection.query(
