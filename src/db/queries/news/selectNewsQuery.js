@@ -1,25 +1,21 @@
-const getDB = require("../../getDB")
+const getDB = require("../../getDB");
 
+const selectNewsQuery = async () => {
+  let connection;
+  try {
+    connection = await getDB();
 
-const selectNewsQuery = async()=>{
-    let connection
-    try{
+    let [news] = await connection.query(`
 
-        connection = await getDB()
+        SELECT N.*, count(V.idNew) as numVotes , V.id, V.idUser, V.idNew FROM news N 
+        LEFT JOIN votes V ON N.id = V.idNew 
+        GROUP BY N.id
+        ORDER BY numVotes DESC`);
 
-        let [news] = await connection.query(`
+    return news;
+  } finally {
+    connection?.release();
+  }
+};
 
-        SELECT N.*,count(N.id) as numValues, V.id, V.idUser, V.idNew, V.value FROM news N 
-        INNER JOIN votes V ON N.id = V.idNew 
-        GROUP BY V.idNew 
-        ORDER BY numValues DESC`)
-
-
-        return news
-
-    }finally{   
-        connection?.release()
-    }
-}
-
-module.exports = selectNewsQuery
+module.exports = selectNewsQuery;

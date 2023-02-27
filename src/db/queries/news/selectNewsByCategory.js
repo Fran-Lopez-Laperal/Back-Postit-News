@@ -18,7 +18,10 @@ const selectNewsByCategory = async (idCategory) => {
     );
 
     if (newByCategory.length < 1) {
-      generateError("No existe la categoría", 404);
+      generateError(
+        `La categoría ${idCategory} no tiene noticias asociadas`,
+        404
+      );
     }
 
     return newByCategory;

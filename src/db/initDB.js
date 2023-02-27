@@ -9,11 +9,10 @@ const createTables = async () => {
     connection = await getDB();
 
     console.log("Borrando tablas...");
-    await connection.query("SET GLOBAL sql_mode=''")
+    await connection.query("SET GLOBAL sql_mode=''");
     await connection.query("DROP TABLE IF EXISTS votes");
-    await connection.query("DROP TABLE IF EXISTS newscategories");
-    await connection.query("DROP TABLE IF EXISTS categories");
     await connection.query("DROP TABLE IF EXISTS news");
+    await connection.query("DROP TABLE IF EXISTS categories");
     await connection.query("DROP TABLE IF EXISTS users");
 
     console.log("Creando tablas...");
@@ -33,6 +32,15 @@ const createTables = async () => {
         `);
 
     await connection.query(`
+            CREATE TABLE IF NOT EXISTS categories (
+                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(100) NOT NULL,
+                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
+            )
+        `);
+
+    await connection.query(`
             CREATE TABLE IF NOT EXISTS news (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 title VARCHAR(30) NOT NULL,
@@ -43,16 +51,8 @@ const createTables = async () => {
                 idCategory INT UNSIGNED NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP,
-                FOREIGN KEY (idUser) REFERENCES users(id)
-            )
-        `);
-
-    await connection.query(`
-            CREATE TABLE IF NOT EXISTS categories (
-                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                name VARCHAR(100) NOT NULL,
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
+                FOREIGN KEY (idUser) REFERENCES users(id),
+                FOREIGN KEY (idCategory) REFERENCES categories(id)
             )
         `);
 
