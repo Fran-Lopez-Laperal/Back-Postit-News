@@ -42,7 +42,7 @@ Existe el rol admin, el cual puede añadir categorías, para posteriormente, pod
 - **POST** [`/news`] - Publica una nueva noticia proporcionando título, imagen opcional, entradilla, texto y categoría.TOKEN🔥
 - **PUT** [`/news/:idNew`] - Edita una noticia publicada por el usuario.TOKEN🔥
 - **DELETE** [`/news/:idNew`] - Borra una noticia publicada por el usuario.TOKEN🔥
-- **POST** [`/news/:idNews/vote/:value`] - Vota positiva o negativamente una noticia. TOKEN
+- **GET** [`/news/:idNews/vote/:value`] - Vota positiva o negativamente una noticia. TOKEN🔥
 - **GET** [`/news/:idNew`] - Devuelve información de una noticia concreta.🔥
 - **DELETE** [`/users`] - Elimina al usuario.TOKEN🔥
 - **POST** [`/news/categories`] - Crear categorias (rol admin).🔥
