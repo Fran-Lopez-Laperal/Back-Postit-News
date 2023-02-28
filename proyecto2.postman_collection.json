@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"roberto@yahoo.es\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"fran@fran.es\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -86,12 +86,12 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Roberto",
+									"value": "Fran",
 									"type": "default"
 								},
 								{
 									"key": "email",
-									"value": "roberto@yahoo.es",
+									"value": "fran@fran.es",
 									"type": "default"
 								},
 								{
@@ -107,8 +107,7 @@
 								{
 									"key": "role",
 									"value": "Admin",
-									"type": "default",
-									"disabled": true
+									"type": "default"
 								},
 								{
 									"key": "photo",
@@ -293,7 +292,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/news/1",
+							"raw": "http://localhost:4000/news/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -301,7 +300,7 @@
 							"port": "4000",
 							"path": [
 								"news",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -390,7 +389,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{token_user_2}}",
+								"value": "{{token_user_1}}",
 								"type": "default"
 							}
 						],
