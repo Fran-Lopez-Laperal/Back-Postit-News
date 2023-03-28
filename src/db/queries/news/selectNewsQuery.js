@@ -7,9 +7,9 @@ const selectNewsQuery = async () => {
 
     let [news] = await connection.query(`
 
-        SELECT N.*, count(V.idNew) as numVotes , V.id, V.idUser, V.idNew FROM news N 
+        SELECT count(V.idNew) as numVotes,V.value="like", V.value="dislike", N.id as idNew, N.* FROM news N 
         LEFT JOIN votes V ON N.id = V.idNew 
-        GROUP BY N.id
+        GROUP BY N.id, V.value ="like", V.value="dislike"
         ORDER BY numVotes DESC`);
 
     return news;
