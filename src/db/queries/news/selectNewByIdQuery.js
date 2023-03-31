@@ -6,9 +6,11 @@ const selectNewByIdQuery = async (idNew) => {
   try {
     connection = await getBD();
 
-    let [infoNew] = await connection.query(`SELECT * FROM news WHERE id = ? `, [
-      idNew,
-    ]);
+    let [infoNew] = await connection.query(
+      `SELECT count(*) as numVotes, N.*, V.value FROM news N
+LEFT JOIN votes V ON V.idNew = N.id WHERE N.id= ? GROUP BY V.value; `,
+      [idNew]
+    );
 
     if (infoNew.length < 1) {
       generateError("Noticia no encontrada", 404);

@@ -13,7 +13,7 @@ const selectUserByEmailQuery = async (email) => {
             [email]
         )
 
-        if (users.lenght < 1) {
+        if (users.length < 1) {
             generateError('Email no válido', 404);
         }
 

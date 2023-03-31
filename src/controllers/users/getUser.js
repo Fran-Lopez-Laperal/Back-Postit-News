@@ -6,9 +6,9 @@ const getUser = async (req, res, next) => {
 
         res.send({
             status: 'ok',
-            data: {
+            data: 
                 user,
-            },
+            
         });
     } catch (err) {
         next(err);

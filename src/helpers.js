@@ -41,7 +41,7 @@ const deleteImg = async (imgName) => {
   try {
     const imgPath = path.join(__dirname, UPLOADS_DIR, imgName);
     await fs.remove(imgPath);
-  } catch {
+  } catch (err){
     generateError("Error al intentar borrar la imagen del disco");
   }
 };
