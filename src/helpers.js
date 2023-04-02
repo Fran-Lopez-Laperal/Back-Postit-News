@@ -20,7 +20,9 @@ const saveImg = async (img, width) => {
     // ¡Ojo! Este módulo no tiene nada que ver con el core module "fs", es una dependencia externa.
     await fs.ensureDir(uploadsPath);
 
-    const sharpImg = sharp(img.photo.data);
+    console.log(img.data);
+
+    const sharpImg = sharp(img.data);
 
     sharpImg.resize(width);
 
