@@ -14,7 +14,7 @@ const newUser = async (req, res, next) => {
 
     const idNewUser = await insertUserQuery(name, email, password, bio, role);
     if (req.files) {
-      const photo = { ...req.files };
+      const photo = { ...req.files.photo };
 
       const photoName = await saveImg(photo, 500);
 
