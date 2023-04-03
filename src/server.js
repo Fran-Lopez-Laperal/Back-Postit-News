@@ -43,8 +43,11 @@ const {
 } = require("./controllers/news");
 
 const { isAuth, isAuthOptional, isAdmin } = require("./middleware");
+const sendImg = require("./controllers/news/sendImg");
 
 //ENDPOINTS
+
+app.get("/images/:filename", sendImg);
 
 app.post("/users/register", newUser);
 app.post("/users/login", loginUser);
