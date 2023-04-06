@@ -5,12 +5,15 @@ const { deleteImg } = require("../../helpers");
 const deleteUser = async (req, res, next) => {
   try {
     console.log(req.user.id);
+
     const { avatar } = await selectUserByIdQuery(req.user.id);
 
-    await deleteImg(avatar);
-    const ImageNews = await deleteUserQuery(req.user.id);
+    console.log(avatar);
 
-    for (let item of ImageNews) {
+    await deleteImg(avatar);
+    const imageNews = await deleteUserQuery(req.user.id);
+
+    for (let item of imageNews) {
       let { image } = item;
       await deleteImg(image);
     }
