@@ -16,9 +16,11 @@ const deleteUser = async (req, res, next) => {
 
     const imageNews = await deleteUserQuery(req.user.id);
 
-    for (let item of imageNews) {
-      let { image } = item;
-      await deleteImg(image);
+    if (imageNews !== null) {
+      for (let item of imageNews) {
+        let { image } = item;
+        await deleteImg(image);
+      }
     }
 
     res.send({

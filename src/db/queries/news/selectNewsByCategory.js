@@ -1,32 +1,31 @@
 const { generateError } = require("../../../helpers");
 const getDB = require("../../getDB");
 
-const selectNewsByCategory = async (categoryName) => {
+const selectNewsByCategory = async (idCategory) => {
   let connection;
 
   try {
     connection = await getDB();
 
-    
-
-    const [newByCategory] = await connection.query(
-      `SELECT C.name AS nameCategory, N.id as idNew, N.title, N.image, N.introduction, N.text, N.createdAt, U.name AS nameUser 
-      FROM news N
-      INNER JOIN users U ON N.idUser = U.id
-      INNER JOIN categories C ON N.idCategory = C.id
-      WHERE C.name = ?;
+    const [newsByCategory] = await connection.query(
+      ` SELECT count(V.idNew) as numVotes,V.value="like", V.value="dislike", N.id as idNew, N.* FROM news N 
+        LEFT JOIN votes V ON N.id = V.idNew 
+        INNER JOIN categories C ON N.idCategory = C.id
+        GROUP BY N.id, V.value ="like", V.value="dislike"
+        HAVING N.idCategory=1
+        ORDER BY numVotes DESC
 `,
-      [categoryName]
+      [idCategory]
     );
 
-    if (newByCategory.length < 1) {
+    if (newsByCategory.length < 1) {
       generateError(
         `No se encontraron noticias para la categoría ${categoryName}`,
         404
       );
     }
 
-    return newByCategory;
+    return newsByCategory;
   } finally {
     if (connection) connection.release();
   }
