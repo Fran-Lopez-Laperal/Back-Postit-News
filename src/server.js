@@ -60,7 +60,7 @@ app.post("/news", isAuth, createNew);
 app.put("/news/:idNew", isAuth, editNew);
 app.post("/news/categories", isAuth, isAdmin, createCategory);
 app.get("/news/categories", getCategories);
-app.get("/news/category/:categoryName", filterNews);
+app.get("/news/filter/:categoryId", filterNews);
 app.get("/news/old", filterOldNews);
 app.get("/news/:idNews/vote/:value", isAuth, voteNew);
 app.delete("/news/:idNew", isAuth, deleteNew);

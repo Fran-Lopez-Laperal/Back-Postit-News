@@ -2,21 +2,21 @@ const selectNewsByCategory = require("../../db/queries/news/selectNewsByCategory
 
 const filterNews = async (req, res, next) => {
   try {
-    const { categoryName } = req.params; //comprobar el cambio a params de query
+    const { categoryId } = req.params; //comprobar el cambio a params de query
 
-    console.log("hola",categoryName);
+    console.log("hola", categoryId);
 
-  /*   let newWithFilter = [];
+    /*   let newWithFilter = [];
 
     for (categoryName of categories) {
       newWithFilter.push(await selectNewsByCategory(categoryName));
     } */
 
-    let newWithFilter = await selectNewsByCategory(categoryName);
+    let newsWithFilter = await selectNewsByCategory(categoryId);
 
     res.send({
       status: "ok",
-      newWithFilter,
+      newsWithFilter,
     });
   } catch (err) {
     next(err);
