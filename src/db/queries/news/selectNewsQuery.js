@@ -7,12 +7,21 @@ const selectNewsQuery = async () => {
 
     let [news] = await connection.query(`
 
-        SELECT count(V.idNew) as numVotes,V.value="like", V.value="dislike", N.id as idNew, N.* FROM news N 
+    SELECT N.*, (SELECT count(*) FROM news WHERE value="like") as totalLikes, 
+    (SELECT count(*) FROM news 
+    WHERE value="dislike") as totalDisLikes 
+    FROM news N 
+    LEFT JOIN votes V ON N.id = V.idNew`
+        
+        );
+        /* SELECT count(V.idNew) as numVotes,V.value="like", V.value="dislike", N.id as idNew, N.* FROM news N 
         LEFT JOIN votes V ON N.id = V.idNew 
         GROUP BY N.id, V.value ="like", V.value="dislike"
-        ORDER BY numVotes DESC`);
+        ORDER BY numVotes DESC` */
+      
+        
 
-    return news;
+      return news;
   } finally {
     connection?.release();
   }

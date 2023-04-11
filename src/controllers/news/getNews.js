@@ -21,10 +21,30 @@ const getNews = async(req, res, next)=>{
             
             // news[i].imagePath = "" + path.join(__dirname, 'src', 'uploads', news[i].image )
         }
+        array_final= []
+
+        for(let i =0; i < news.length; i++){
+            
+            let existe = array_final.filter(e=>e.id == news[i].id)
+            
+            if (existe.length ==0) {
+                array_final.push(news[i])
+            }else{
+            
+            array_final.map(e=>{ 
+                if(e.id == news[i].id) {
+                    e.totalLikes += news[i].totalLikes;
+                    e.totalDisLikes += news[i].totalDisLikes;
+                } 
+            })
+            }
+        }
+        
+        
 
         res.send({
             status: "ok",
-            data: news,
+            data: array_final,
         })
     }catch(e){
         next(e)
