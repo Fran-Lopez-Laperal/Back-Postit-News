@@ -12,7 +12,7 @@ const selectNewsByCategory = async (idCategory) => {
         LEFT JOIN votes V ON N.id = V.idNew 
         INNER JOIN categories C ON N.idCategory = C.id
         GROUP BY N.id, V.value ="like", V.value="dislike"
-        HAVING N.idCategory=1
+        HAVING N.idCategory= ?
         ORDER BY numVotes DESC
 `,
       [idCategory]
@@ -20,7 +20,7 @@ const selectNewsByCategory = async (idCategory) => {
 
     if (newsByCategory.length < 1) {
       generateError(
-        `No se encontraron noticias para la categoría ${categoryName}`,
+        `No se encontraron noticias para la categoría ${idCategory}`,
         404
       );
     }

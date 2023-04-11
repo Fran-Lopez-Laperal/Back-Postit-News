@@ -4,8 +4,6 @@ const filterNews = async (req, res, next) => {
   try {
     const { categoryId } = req.params; //comprobar el cambio a params de query
 
-    console.log("hola", categoryId);
-
     /*   let newWithFilter = [];
 
     for (categoryName of categories) {

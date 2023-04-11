@@ -68,6 +68,16 @@ const createTables = async () => {
             )
         `);
 
+    await connection.query(
+      `INSERT INTO categories (name) VALUES ("actualidad")`
+    );
+
+    await connection.query(
+      `INSERT INTO categories (name) VALUES ("programación web")`
+    );
+
+    await connection.query(`INSERT INTO categories (name) VALUES ("deportes")`);
+
     console.log("¡Tablas creadas!");
   } catch (err) {
     console.error(err);
