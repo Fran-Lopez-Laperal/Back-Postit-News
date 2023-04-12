@@ -8,12 +8,16 @@ const selectNewsByCategory = async (idCategory) => {
     connection = await getDB();
 
     const [newsByCategory] = await connection.query(
-      ` SELECT count(V.idNew) as numVotes,V.value="like", V.value="dislike", N.id as idNew, N.* FROM news N 
-        LEFT JOIN votes V ON N.id = V.idNew 
-        INNER JOIN categories C ON N.idCategory = C.id
-        GROUP BY N.id, V.value ="like", V.value="dislike"
-        HAVING N.idCategory= ?
-        ORDER BY numVotes DESC
+      ` 
+      SELECT N.*, U.name as userName, U.email as userEmail, U.avatar as userAvatar, C.name as categoryName, 
+        (SELECT count(*) FROM news WHERE value="like") as totalLikes, 
+        (SELECT count(*) FROM news 
+          WHERE value="dislike") as totalDisLikes 
+          FROM news N 
+              LEFT JOIN votes V ON N.id = V.idNew
+             INNER JOIN users U ON U.id = N.idUser
+             INNER JOIN categories C ON C.id = N.idCategory
+             WHERE C.id= ?
 `,
       [idCategory]
     );
