@@ -7,8 +7,15 @@ const selectNewByIdQuery = async (idNew) => {
     connection = await getBD();
 
     let [infoNew] = await connection.query(
-      `SELECT count(*) as numVotes, N.*, V.value FROM news N
-LEFT JOIN votes V ON V.idNew = N.id WHERE N.id= ? GROUP BY V.value; `,
+      `SELECT N.*, U.name as userName, U.email as userEmail, U.avatar as userAvatar, C.name as categoryName, 
+(SELECT count(*) FROM news WHERE value="like") as totalLikes, 
+(SELECT count(*) FROM news 
+    WHERE value="dislike") as totalDisLikes 
+    FROM news N 
+    LEFT JOIN votes V ON N.id = V.idNew
+    INNER JOIN users U ON U.id = N.idUser
+    INNER JOIN categories C ON C.id = N.idCategory
+    WHERE N.id=2 `,
       [idNew]
     );
 
