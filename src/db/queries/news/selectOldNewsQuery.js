@@ -9,7 +9,8 @@ const selectOldNewsQuery = async () => {
         connection = await getDB();
 
         let [news] = await connection.query(
-            `SELECT * FROM news ORDER BY createdAt `
+            `SELECT * FROM news WHERE DATE(createdAt) < CURDATE() ORDER BY createdAt
+            `
         )
         return news
 
