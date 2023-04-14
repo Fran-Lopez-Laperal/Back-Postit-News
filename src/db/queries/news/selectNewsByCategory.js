@@ -7,20 +7,30 @@ const selectNewsByCategory = async (idCategory) => {
   try {
     connection = await getDB();
 
+    const [nameCategory] = await connection.query(
+      `SELECT name FROM categories WHERE id= ?`,
+      [idCategory]
+    );
+
+    console.log("nameCategory", nameCategory);
+
     const [newsByCategory] = await connection.query(
-      ` SELECT count(V.idNew) as numVotes,V.value="like", V.value="dislike", N.id as idNew, N.* FROM news N 
-        LEFT JOIN votes V ON N.id = V.idNew 
-        INNER JOIN categories C ON N.idCategory = C.id
-        GROUP BY N.id, V.value ="like", V.value="dislike"
-        HAVING N.idCategory= ?
-        ORDER BY numVotes DESC
+      ` SELECT C.name as nameCategory, U.name, U.email, U.avatar, N.*, 
+      SUM(CASE WHEN V.value = "like" THEN 1 ELSE 0 END) as totalLikes,
+      SUM(CASE WHEN V.value = "dislike" THEN 1 ELSE 0 END) as totalDisLikes,
+      V.value as userVote
+      FROM news N 
+      LEFT JOIN votes V ON N.id = V.idNew
+      LEFT JOIN users U ON U.id = N.idUser
+      LEFT JOIN categories C ON C.id = N.idCategory
+      GROUP BY N.id HAVING N.idCategory=?
 `,
       [idCategory]
     );
 
     if (newsByCategory.length < 1) {
       generateError(
-        `No se encontraron noticias para la categoría ${idCategory}`,
+        `No se encontraron noticias para la categoría "${nameCategory[0].name}"`,
         404
       );
     }
