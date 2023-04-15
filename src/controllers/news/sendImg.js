@@ -12,13 +12,15 @@ const path = require("path");
 const sendImg = (req, res) => {
   const { filename } = req.params;
 
-  if (filename === null) {
-    const imgPath = path.join(__dirname, "..", "..", "uploads", filename);
-    res.sendFile(imgPath);
+  let imgPath;
+
+  if (filename == null) {
+    imgPath = path.join(__dirname, "..", "..", "uploads", filename);
   } else {
-    const imgPath = path.join(__dirname, "..", "..", "uploads", "foto.jpg");
-    res.sendFile(imgPath);
+    imgPath = path.join(__dirname, "..", "..", "uploads", "foto.jpg");
   }
+
+  res.sendFile(imgPath);
 };
 
 module.exports = sendImg;
