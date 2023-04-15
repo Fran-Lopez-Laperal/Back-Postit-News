@@ -21,7 +21,6 @@ const sendImg = (req, res) => {
   // if (!filename) {
   //   imgPath = path.join(__dirname, "..", "..", "uploads", "foto.jpg").trim();
   // }
-  console.log("imgPath", imgPath);
 
   res.sendFile(imgPath);
 };
