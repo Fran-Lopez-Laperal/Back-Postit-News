@@ -27,12 +27,12 @@ const selectNewsByCategory = async (idCategory) => {
 
     if (newsByCategory.length < 1) {
       generateError(
-        `No se encontraron noticias para la categoría "${nameCategory[0].name}"`,
+        `No se encontraron noticias para la categoría "${nameCategory[0]?.name}"`,
         404
       );
     }
 
-    return newsByCategory; 
+    return newsByCategory;
   } finally {
     if (connection) connection.release();
   }

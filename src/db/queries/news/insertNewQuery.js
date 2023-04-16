@@ -7,6 +7,7 @@ const insertNewQuery = async (
   idCategory,
   idUser
 ) => {
+  console.log("query", title, introduction, text, idCategory, idUser);
   let connection;
 
   try {

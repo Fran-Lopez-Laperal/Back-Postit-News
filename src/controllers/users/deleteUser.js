@@ -10,13 +10,18 @@ const deleteUser = async (req, res, next) => {
 
     console.log("avatar", avatar);
 
-    if (avatar !== null) {
+    avatar ?? false;
+
+    if (avatar) {
+      console.log(avatar);
       await deleteImg(avatar);
     }
 
     const imageNews = await deleteUserQuery(req.user.id);
 
-    if (imageNews !== null) {
+    console.log(imageNews);
+
+    if (imageNews[0].image !== null) {
       for (let item of imageNews) {
         let { image } = item;
         await deleteImg(image);
