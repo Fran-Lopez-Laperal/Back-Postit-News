@@ -1,28 +1,23 @@
-const { generateError } = require('../../helpers')
+const { generateError } = require('../../helpers');
+const sharp = require('sharp');
+const path = require('path');
 
-const path = require("path");
-
-const sendImg = (req, res, next) => {
-  try{
+const sendImg = async (req, res, next) => {
+  try {
     const { filename } = req.params;
+    const imagePath = path.join(__dirname, '..', '..', 'uploads', filename ?? 'foto.jpg');
 
-    console.log("filename", filename);
+    const resizedImage = await sharp(imagePath).resize(800).toBuffer();
 
-    let imgPath = path
-      .join(__dirname, "..", "..", "uploads", filename ?? "foto.jpg")
-      .trim();
+    const fileExtension = path.extname(imagePath).substring(1);
+    const contentType = `image/${fileExtension}`;
 
-    // if (!filename) {
-    //   imgPath = path.join(__dirname, "..", "..", "uploads", "foto.jpg").trim();
-    // }
-
-    res.sendFile(imgPath);
-
-    generateError("Esto esta que arde", 404)
-    
-  }catch(error){
-    next(error)
+    res.set('Content-Type', contentType);
+    res.send(resizedImage);
+  } catch (error) {
+    next(generateError('Error al enviar la imagen', 500));
   }
 };
 
 module.exports = sendImg;
+
