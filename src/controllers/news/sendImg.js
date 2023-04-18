@@ -1,28 +1,28 @@
-/* const sendImg = (req, res) => {
-  const { filename } = req.params;
-  res.sendFile(
-    `C:\\Users\\corbu\\Desktop\\Desarrollo\\Back-Postit-News\\src\\uploads\\${filename}`
-  );
-};
-
-module.exports = sendImg; */
+const { generateError } = require('../../helpers')
 
 const path = require("path");
 
-const sendImg = (req, res) => {
-  const { filename } = req.params;
+const sendImg = (req, res, next) => {
+  try{
+    const { filename } = req.params;
 
-  console.log("filename", filename);
+    console.log("filename", filename);
 
-  let imgPath = path
-    .join(__dirname, "..", "..", "uploads", filename ?? "foto.jpg")
-    .trim();
+    let imgPath = path
+      .join(__dirname, "..", "..", "uploads", filename ?? "foto.jpg")
+      .trim();
 
-  // if (!filename) {
-  //   imgPath = path.join(__dirname, "..", "..", "uploads", "foto.jpg").trim();
-  // }
+    // if (!filename) {
+    //   imgPath = path.join(__dirname, "..", "..", "uploads", "foto.jpg").trim();
+    // }
 
-  res.sendFile(imgPath);
+    res.sendFile(imgPath);
+
+    generateError("Esto esta que arde", 404)
+    
+  }catch(error){
+    next(error)
+  }
 };
 
 module.exports = sendImg;

@@ -69,6 +69,7 @@ app.get("/news", getNews);
 
 //MIDDLEWARE ERROR
 
+
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(err.httpStatus || 500).send({
@@ -84,6 +85,7 @@ app.use((req, res) => {
     message: "Ruta no encontrada",
   });
 });
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening at http://localhost:${process.env.PORT}`);
