@@ -7,13 +7,13 @@ const newUser = async (req, res, next) => {
   try {
     console.log(req.body, req.files);
     const { name, email, password, bio, role } = req.body;
-    console.log("Viene todo el body por las request?", req.body);
     if (!name || !email || !password || !bio) {
       generateError("Faltan campos", 400);
     }
 
     const idNewUser = await insertUserQuery(name, email, password, bio, role);
-    if (req.files) {
+
+    if (req.files && req.files.photo) {
       const photo = { ...req.files.photo };
 
       const photoName = await saveImg(photo, 500);
