@@ -5,6 +5,7 @@ const getNew = async (req, res, next) => {
     const { idNew } = req.params;
 
     const ownNew = await selectNewByIdQuery(idNew);
+    console.log(ownNew);
 
     res.send({
       status: "ok",
