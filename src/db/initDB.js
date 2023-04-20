@@ -69,14 +69,34 @@ const createTables = async () => {
         `);
 
     await connection.query(
-      `INSERT INTO categories (name) VALUES ("actualidad")`
+      `INSERT INTO categories (name) VALUES ("lenguajes")`
     );
 
     await connection.query(
-      `INSERT INTO categories (name) VALUES ("programación web")`
+      `INSERT INTO categories (name) VALUES ("tecnologías emergentes")`
     );
 
-    await connection.query(`INSERT INTO categories (name) VALUES ("deportes")`);
+    await connection.query(`INSERT INTO categories (name) VALUES ("herramientas y frameworks")`);
+
+    await connection.query(
+      `INSERT INTO categories (name) VALUES ("desarrollo web")`
+    );
+
+    await connection.query(
+      `INSERT INTO categories (name) VALUES ("desarrollo móvil")`
+    );
+
+    await connection.query(
+      `INSERT INTO categories (name) VALUES ("ciencia de datos")`
+    );
+
+    await connection.query(
+      `INSERT INTO categories (name) VALUES ("emprendimiento y startups")`
+    );
+
+    await connection.query(
+      `INSERT INTO categories (name) VALUES ("entrevistas y perfiles")`
+    );
 
     console.log("¡Tablas creadas!");
   } catch (err) {
