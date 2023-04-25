@@ -5,13 +5,16 @@ const path = require("path");
 const sendImg = async (req, res, next) => {
   try {
     const { filename } = req.params;
+    console.log("filename", filename);
 
     let imagePath;
 
-    if (filename === "null") {
-      imagePath = path.join(__dirname, "..", "..", "..", "photoNull.jpg");
+    if (filename !== "null") {
+      imagePath = path.join(__dirname, "..", "..", "uploads", filename).trim();
     } else {
-      imagePath = path.join(__dirname, "..", "..", "..", "uploads", filename);
+      imagePath = path
+        .join(__dirname, "..", "..", "uploads", "foto.jpg")
+        .trim();
     }
 
     const resizedImage = await sharp(imagePath).resize(800).toBuffer();
