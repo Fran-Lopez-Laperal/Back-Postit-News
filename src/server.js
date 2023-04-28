@@ -19,8 +19,6 @@ app.use(express.json());
 
 app.use(fileUpload());
 
-
-
 //CONTROLLERS
 const {
   newUser,
@@ -41,16 +39,15 @@ const {
   deleteNew,
   getNew,
   getNews,
-  getCategories
+  getCategories,
 } = require("./controllers/news");
 
-
 const { isAuth, isAuthOptional, isAdmin } = require("./middleware");
-
-
-
+const sendImg = require("./controllers/news/sendImg");
 
 //ENDPOINTS
+
+app.get("/images/:filename", sendImg);
 
 app.post("/users/register", newUser);
 app.post("/users/login", loginUser);
@@ -62,16 +59,16 @@ app.delete("/users", isAuth, deleteUser);
 app.post("/news", isAuth, createNew);
 app.put("/news/:idNew", isAuth, editNew);
 app.post("/news/categories", isAuth, isAdmin, createCategory);
-app.get("/news/categories", getCategories)
-app.post("/news/filter", filterNews);
+app.get("/news/categories", getCategories);
+app.get("/news/filter/:categoryId", filterNews);
 app.get("/news/old", filterOldNews);
-app.get('/news/:idNews/vote/:value', isAuth, voteNew);
+app.get("/news/:idNews/vote/:value", isAuth, voteNew);
 app.delete("/news/:idNew", isAuth, deleteNew);
-app.get('/news/:idNew', isAuthOptional, getNew);
-app.get('/news', getNews)
-
+app.get("/news/:idNew", isAuthOptional, getNew);
+app.get("/news", getNews);
 
 //MIDDLEWARE ERROR
+
 
 app.use((err, req, res, next) => {
   console.error(err);
@@ -88,6 +85,7 @@ app.use((req, res) => {
     message: "Ruta no encontrada",
   });
 });
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening at http://localhost:${process.env.PORT}`);

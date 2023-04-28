@@ -1,6 +1,8 @@
 const { generateError } = require("../../../helpers");
 const getDB = require("../../getDB");
 
+
+
 const selectUserByEmailQuery = async (email) => {
     let connection;
 

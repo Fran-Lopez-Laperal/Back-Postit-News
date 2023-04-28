@@ -1,23 +1,21 @@
-const selectCategoriesQuery = require("../../db/queries/news/selectCategoriesQuery")
-const { generateError } = require("../../helpers")
+const selectCategoriesQuery = require("../../db/queries/news/selectCategoriesQuery");
+const { generateError } = require("../../helpers");
 
+const getCategories = async (req, res, next) => {
+  try {
+    const categories = await selectCategoriesQuery();
 
+    console.log("querydeCategorias", categories);
 
-const getCategories = async (req, res, next)=>{
-    try{
+    if (categories.length == 0) generateError("No existen categorias", 404);
 
-        const categories = await selectCategoriesQuery()
+    res.send({
+      status: "ok",
+      categories,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
 
-        if(categories.length == 0 ) generateError("No existen categorias", 404)
-
-        res.send({
-            status : "ok",
-            categories
-        })
-
-    }catch(e){
-        next(e)
-    }
-}
-
-module.exports= getCategories
+module.exports = getCategories;

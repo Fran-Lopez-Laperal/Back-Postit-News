@@ -7,24 +7,33 @@ const selectNewsByCategory = async (idCategory) => {
   try {
     connection = await getDB();
 
-    const [newByCategory] = await connection.query(
-      `SELECT C.id AS idCategory, C.name AS nameCategory, N.id as idNew, N.title, N.image, N.introduction, N.text, N.createdAt, U.name AS nameUser 
-      FROM news N
-      INNER JOIN users U ON N.idUser = U.id
-      INNER JOIN categories C ON N.idCategory = C.id
-      WHERE C.id = ?;
+    const [nameCategory] = await connection.query(
+      `SELECT name FROM categories WHERE id= ?`,
+      [idCategory]
+    );
+
+    console.log("nameCategory", nameCategory);
+
+    const [newsByCategory] = await connection.query(
+      ` SELECT count(V.idNew) as numVotes,V.value="like", V.value="dislike", N.id as idNew, N.*, U.avatar, U.name as userName, C.name as nameCategory  FROM news N 
+        LEFT JOIN votes V ON N.id = V.idNew 
+        INNER JOIN categories C ON N.idCategory = C.id
+        INNER JOIN users U ON U.id = N.idUser
+        GROUP BY N.id, V.value ="like", V.value="dislike"
+        HAVING N.idCategory= ?
+        ORDER BY numVotes DESC
 `,
       [idCategory]
     );
 
-    if (newByCategory.length < 1) {
+    if (newsByCategory.length < 1) {
       generateError(
-        `La categoría ${idCategory} no tiene noticias asociadas`,
+        `No se encontraron noticias para la categoría "${nameCategory[0]?.name}"`,
         404
       );
     }
 
-    return newByCategory;
+    return newsByCategory;
   } finally {
     if (connection) connection.release();
   }

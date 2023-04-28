@@ -5,14 +5,27 @@ const { deleteImg } = require("../../helpers");
 const deleteUser = async (req, res, next) => {
   try {
     console.log(req.user.id);
+
     const { avatar } = await selectUserByIdQuery(req.user.id);
 
-    await deleteImg(avatar);
-    const ImageNews = await deleteUserQuery(req.user.id);
+    console.log("avatar", avatar);
 
-    for (let item of ImageNews) {
-      let { image } = item;
-      await deleteImg(image);
+    avatar ?? false;
+
+    if (avatar) {
+      console.log(avatar);
+      await deleteImg(avatar);
+    }
+
+    const imageNews = await deleteUserQuery(req.user.id);
+
+    console.log(imageNews);
+
+    if (imageNews[0].image !== null) {
+      for (let item of imageNews) {
+        let { image } = item;
+        await deleteImg(image);
+      }
     }
 
     res.send({

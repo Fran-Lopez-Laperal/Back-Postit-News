@@ -15,7 +15,7 @@ const selectCategoriesQuery = async()=>{
         return categories
 
     }finally{
-
+        if (connection) connection.release();
     }
 }
 

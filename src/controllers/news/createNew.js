@@ -6,36 +6,41 @@ const { generateError, saveImg } = require("../../helpers");
 const createNew = async (req, res, next) => {
   try {
     const { title, introduction, text, category } = req.body;
-    console.log(req.body);
+    console.log("req.body", req.body);
+
     if (!title || !introduction || !text || !category) {
       generateError("Faltan campos", 400);
     }
 
-    const idNews = await insertNewQuery(
+    const idNew = await insertNewQuery(
       title,
       introduction,
       text,
-      category,
+      +category,
       req.user.id
     );
 
-    //await insertCategoryInNewQuery(idNews, category);
+    console.log("idNew", idNew);
 
     let photo;
 
-    if (req.files) {
-      const photo = { ...req.files.photo };
+    if (req.files && req.files.photo) {
+      photo = { ...req.files.photo };
+
+      console.log("photo", photo);
 
       const photoNew = await saveImg(photo, 500);
 
-      const idPhoto = await insertPhotoNewQuery(photoNew, idNews);
+      await insertPhotoNewQuery(photoNew, idNew);
     }
+
+    console.log("Va a enviar el res.send");
 
     res.send({
       status: "ok",
       data: {
         new: {
-          id: idNews,
+          id: idNew,
           title,
           introduction,
           text,
@@ -46,6 +51,8 @@ const createNew = async (req, res, next) => {
         },
       },
     });
+
+    console.log("res.send enviado");
   } catch (err) {
     next(err);
   }

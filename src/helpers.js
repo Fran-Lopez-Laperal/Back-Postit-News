@@ -20,6 +20,8 @@ const saveImg = async (img, width) => {
     // ¡Ojo! Este módulo no tiene nada que ver con el core module "fs", es una dependencia externa.
     await fs.ensureDir(uploadsPath);
 
+    console.log(img.data);
+
     const sharpImg = sharp(img.data);
 
     sharpImg.resize(width);
@@ -41,7 +43,7 @@ const deleteImg = async (imgName) => {
   try {
     const imgPath = path.join(__dirname, UPLOADS_DIR, imgName);
     await fs.remove(imgPath);
-  } catch (err){
+  } catch (err) {
     generateError("Error al intentar borrar la imagen del disco");
   }
 };
